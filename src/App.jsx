@@ -1,15 +1,18 @@
 import {useDispatch, useSelector} from "react-redux"
 import './App.css'
-import { increment } from "./Redux/counterslice";
+import { increment ,decrement,reset,increasebyamount } from "./Redux/counterslice";
 import { addtodo,deletetodo,editTodo } from "./Redux/todoslice";
 import { useState } from "react";
+
 function App() {
+  
+
   const [editIndex, setEditIndex] = useState(null);
  const count= useSelector((state)=>state.counter.count);
   const[input,setInput] =useState("");
    const todos = useSelector((state)=>state.todo.todos);   
   const dispatch= useDispatch();
-
+  
 
  function handlechange(){
     if(editIndex!==null){
@@ -35,6 +38,9 @@ function App() {
     <>
      <h1>{count}</h1>
      <button onClick={()=>dispatch(increment())}>increase</button> <br></br> <br></br>
+     <button onClick={()=>dispatch(decrement())}>decrese</button><br></br>
+     <button onClick={()=>dispatch(reset())}>Reset</button><br></br> <br></br>
+     <button onClick={()=>dispatch(increasebyamount(5))}>increasebyamount</button><br></br> <br></br>
      <input type="text" value={input} onChange={(e)=>setInput(e.target.value)} />
      <button onClick={handlechange} >
       {editIndex!==null?"update":"add"}
@@ -53,7 +59,8 @@ function App() {
      
     }
     <br></br>
-      
+       
+   
     
    
     </>
